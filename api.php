@@ -272,7 +272,7 @@ function act_import_cfg_reset_to($data) {
 //导入数据
     $to_config = config('to_db');
     $to_db = new DataBase($to_config);
-    $to_db->query(" SELECT id, topid AS pId, typename AS name FROM `#@__arctype` ");
+    $to_db->query(" SELECT id, reid AS pId, typename AS name FROM `#@__arctype` ");
     $to_rs = $to_db->fetch_array();
     if($to_rs){
         foreach($to_rs as $item){
