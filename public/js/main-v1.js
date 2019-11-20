@@ -153,6 +153,7 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
                     //选择状态
                     functionLib.checkExportDBConfig();
 
+                    custom.alert('保存配置成功', 'success');
                 }
                 // $("#messageBox").html(data.desc);
             },
@@ -179,6 +180,9 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
 
                     //多选勾选状态
                     functionLib.checkImportDBConfig();
+
+                    custom.alert('保存配置成功', 'success');
+
                 }
                 // $("#messageBox").html(data.desc);
             },
@@ -353,6 +357,11 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
     // ===========================================================
 
 
+    //返回菜单
+    $( "#backMenu" ).off("click").click(function( event ) {
+        window.location.href=myDomain;
+        event.preventDefault();
+    });
     // 检测导出配置
     $( "#from-cfg-button" ).off("click").click(function( event ) {
         // alert('from-cfg-button');

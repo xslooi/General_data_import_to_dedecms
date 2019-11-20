@@ -4,6 +4,7 @@ var myDomain = (function(){
     var cur_href_arr = cur_href.split('/');
     return cur_href.replace(cur_href_arr[cur_href_arr.length-1], '');
 })();
+
 // 私有全局变量
 var _GLOBALS = {};
 // console.log(myDomain);
@@ -682,9 +683,9 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
 
                 if(data.data){
                     var arr = data.data;
-                    var list_html = '<li><label>（类别字段名称）：</label><ul class="to-field importField" id="category_id"></ul></li>';
+                    var list_html = '<li><label>（类别关联字段）：</label><ul class="to-field importField" id="category_id"></ul></li>';
                     list_html += '<li><label>（主表关联字段）：</label><ul class="to-field importField" id="master_id"></ul></li>';
-                    list_html += '<li><label>（附表关联字段）：</label><ul class="to-field importField" id="slave_id"></ul></li>';
+                    list_html += '<li><label>（附加表关联字段）：</label><ul class="to-field importField" id="slave_id"></ul></li>';
                     var selector = '#export_fields_lists';
                     var Xselector = '#category_id li i,#master_id li i,#slave_id li i,'; //拖拉关闭按钮选择器
 
@@ -938,7 +939,11 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
     // ===========================================================
 
 
-
+    //返回菜单
+    $( "#backMenu" ).off("click").click(function( event ) {
+        window.location.href = myDomain;
+        event.preventDefault();
+    });
     // 检测导出配置
     $( "#from-cfg-button" ).off("click").click(function( event ) {
         // alert('from-cfg-button');
@@ -1185,12 +1190,13 @@ require(['jquery', 'jquery.dragsort'], function ($) {
     var saveOrder = function saveOrder() {
         $("#to_field_title li i").hide();
         $("#from_field_lists li i").show();
-        return;
-        var data = $("#from_field_lists li").map(function() {
-            return $(this).children().html();
-        }).get();
 
-        $("input[name=list1SortOrder]").val(data.join("|"));
+        // return;
+        // var data = $("#from_field_lists li").map(function() {
+        //     return $(this).children().html();
+        // }).get();
+        //
+        // $("input[name=list1SortOrder]").val(data.join("|"));
     };
 
     // $("#from_field_lists, #to_field_title, #to_field_litpic, #to_field_pubdate, #to_field_body").dragsort({ dragSelector: "div", dragBetween: true, dragEnd: saveOrder, placeHolderTemplate: "<li class='placeHolder'><div></div></li>" });

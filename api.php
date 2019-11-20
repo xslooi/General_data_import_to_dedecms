@@ -470,7 +470,7 @@ function act_start_v2($data) {
 //    2、获得导出数据库数据
     //TODO 此处每次获得所有数据但只用一条，内部可加个缓存，只调用需要的那一条
     $from_data = getRelevanceData($import_typeid['from_typeid'], $FROM_DB);
-
+//var_dump($from_data);
 //    4、循环插入数据
     $addontablestruct = array();
     foreach($toAddonTable as $value){
@@ -490,7 +490,7 @@ function act_start_v2($data) {
                 }
             }
         }
-
+//var_dump($from_data[$step]);
         insertOne($from_data[$step], $import_typeid['to_typeid'], $to_channelType['addtable'], $addontablestruct, $TO_DB);
     }
 
@@ -1127,46 +1127,48 @@ function getRelevanceData($tid, $db){
 
 
     foreach($fromResults as $i=>$item){
-        //赋默认值
-        $result[$i] = $dedecms_default_value;
 
-        foreach($field_relevanceConfig as $key=>$val){
-            if(empty($val)){
-//                $result[$i][$key] = '';
-            }else{
+        //开始处理字段转换配置
+        if(empty($field_relevanceConfig)){
+            //直接赋值数据库内容
+            $result[$i] = $item;
+        }
+        else{
+            foreach($field_relevanceConfig as $key=>$val){
 
-               $convert_encode = explode('|', $field_convertConfig[$key][0]);
-               $convert_opera = explode('|', $field_convertConfig[$key][1]);
+                $convert_encode = explode('|', $field_convertConfig[$key][0]);
+                $convert_opera = explode('|', $field_convertConfig[$key][1]);
 
-               //转换编码
-               if(!empty($convert_encode[1])){
-                   $fromResults[$i][$val] = iconv($convert_encode[1], 'utf-8//IGNORE', $item[$val]);
-               }
+                //转换编码
+                if(!empty($convert_encode[1])){
+                    $fromResults[$i][$val] = iconv($convert_encode[1], 'utf-8//IGNORE', $item[$val]);
+                }
 
 //               var_dump($convert_encode);
 //               var_dump($convert_opera);
                 //根据配置转换内容
-               switch ($convert_opera[0]){
-                   case 'time':
-                       $result[$i][$key] = strtotime($fromResults[$i][$val]);
-                       break;
-                   case 'substr':
-                       $result[$i][$key] = mb_substr($fromResults[$i][$val], 0, $convert_opera[1]);
-                       break;
-                   case 'defaultvalue':
-                       $result[$i][$key] = $convert_opera[1];
-                       break;
-                   case 'replace':
-                       $result[$i][$key] = str_replace(explode('#', $convert_opera[1]), explode('#', $convert_opera[2]), $fromResults[$i][$val]);
-                       break;
-                   default :
-                       $result[$i][$key] = $fromResults[$i][$val];
-               }
+                switch ($convert_opera[0]){
+                    case 'time':
+                        $result[$i][$key] = strtotime($fromResults[$i][$val]);
+                        break;
+                    case 'substr':
+                        $result[$i][$key] = mb_substr($fromResults[$i][$val], 0, $convert_opera[1]);
+                        break;
+                    case 'defaultvalue':
+                        $result[$i][$key] = $convert_opera[1];
+                        break;
+                    case 'replace':
+                        $result[$i][$key] = str_replace(explode('#', $convert_opera[1]), explode('#', $convert_opera[2]), $fromResults[$i][$val]);
+                        break;
+                    default :
+                        $result[$i][$key] = $fromResults[$i][$val];
+                }
 
-               //额外附加操作
+                //额外附加操作
                 if(!empty($result[$i]['litpic'])){
                     $result[$i]['flag'] = 'p';
                 }
+
             }
         }
     }

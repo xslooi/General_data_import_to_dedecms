@@ -682,7 +682,7 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
 
                 if(data.data){
                     var arr = data.data;
-                    var list_html = '<li><label>（类别字段名称）：</label><ul class="to-field importField" id="category_id"></ul></li>';
+                    var list_html = '<li><label>（类别关联字段）：</label><ul class="to-field importField" id="category_id"></ul></li>';
                     list_html += '<li><label>（主表关联字段）：</label><ul class="to-field importField" id="master_id"></ul></li>';
                     list_html += '<li><label>（附表关联字段）：</label><ul class="to-field importField" id="slave_id"></ul></li>';
                     var selector = '#export_fields_lists';
@@ -938,7 +938,11 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
     // ===========================================================
 
 
-
+    //返回菜单
+    $( "#backMenu" ).off("click").click(function( event ) {
+        window.location.href=myDomain;
+        event.preventDefault();
+    });
     // 检测导出配置
     $( "#from-cfg-button" ).off("click").click(function( event ) {
         // alert('from-cfg-button');
