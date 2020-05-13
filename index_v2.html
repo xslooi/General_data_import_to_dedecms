@@ -53,6 +53,7 @@
                         <label for="is-export-images">是否导出图片</label>
                         <input type="checkbox" name="is-export-images" id="is-export-images">
                     </div>
+                    <span style="color: red;">刷新页面会取消导出图片！</span>
                     <button id="start-button" class="ui-button ui-corner-all ui-widget">开始导入</button>
                 </fieldset>
             </li>
@@ -61,7 +62,7 @@
 </div>
 
 <!-- 手风琴 -->
-<h2 class="demoHeaders">操作步骤：</h2>
+<h2 class="demoHeaders">操作步骤：<span style="color: red;">注意每次使用先重置再保存！</span></h2>
 
 
 <div id="accordion">
@@ -76,7 +77,7 @@
                     <li><label>密码：</label><input type="text" name="dbpwd" value="root" placeholder="password"> </li>
                     <li><label>数据库名称：</label><input type="text" name="dbname" value="" placeholder="databasename"> </li>
                     <li><label>数据表前缀：</label><input type="text" name="dbprefix" value="" placeholder="pre_"> </li>
-                    <li><label>数据库编码：</label><input type="text" name="dblanguage" value="utf-8" placeholder="utf-8"> </li>
+                    <li><label>数据库编码：</label><input type="text" name="dblanguage" value="utf-8" placeholder="utf-8"> <span style="color: red;">注意编码！</span></li>
                     <li><label></label><button id="from-cfg-save-button" class="ui-button ui-corner-all ui-widget" type="button">保存配置</button></li>
                 </ol>
             </form>
@@ -90,7 +91,7 @@
                     <li><label>密码：</label><input type="text" name="dbpwd" value="root" placeholder="password"> </li>
                     <li><label>数据库名称：</label><input type="text" name="dbname" value="" placeholder="databasename"> </li>
                     <li><label>数据表前缀：</label><input type="text" name="dbprefix" value="dede_" placeholder="dede_"> </li>
-                    <li><label>数据库编码：</label><input type="text" name="dblanguage" value="utf-8" placeholder="utf-8"> </li>
+                    <li><label>数据库编码：</label><input type="text" name="dblanguage" value="utf-8" placeholder="utf-8"> <span style="color: red;">注意编码！</span></li>
                     <li><label></label><button id="to-cfg-save-button" class="ui-button ui-corner-all ui-widget" type="button">保存配置</button></li>
                 </ol>
             </form>
@@ -146,7 +147,7 @@
             </ul>
         </div>
         <div class="custom-form-box custom-right">
-            <h4>导入数据表字段列表（暂列出必须字段）</h4>
+            <h4>导入数据表字段列表（暂列出必须字段）无限级栏目默认字段设计</h4>
             <ol>
                 <li>
                     <label>数据标识ID（id）：</label>
@@ -225,14 +226,14 @@
         </h4>
 
         <div class="custom-form-box custom-left">
-            <h4>导出数据表字段列表（可以重复加载，以保证右侧数据基本完整）</h4>
+            <h4>导出数据表字段列表（<span style="color: red;">可以重复加载，以保证右侧数据基本完整</span>）</h4>
             <ul class="to-field" id="export_fields_lists">
                 <li><i>X</i><div data-id="1">暂无数据</div></li>
             </ul>
         </div>
 
         <div class="custom-form-box custom-right">
-            <h4>导入数据表字段列表（暂列出必须字段）</h4>
+            <h4>导入数据表字段列表（暂列出必须字段）<span style="color: red;">没有附加表，2和3可以不配置</span></h4>
             <ol id="import_fields_lists">
                 <li><label>暂无数据请点击重置按钮</label><ul class="to-field"></ul></li>
             </ol>
@@ -244,6 +245,7 @@
             <button id="relevance-save" class="ui-button ui-corner-all ui-widget">保存操作配置</button>
             <button id="relevance-reload" class="ui-button ui-corner-all ui-widget">重新加载关联列表</button>
             <button id="relevance-reset" class="ui-button ui-corner-all ui-widget">重置关联配置</button>
+            <span style="color: red;">重置后需要“步骤七”重新保存。并重新“加载关联列表”并“保存操作配置”</span>
         </h4>
 
         <ol id="relevance_field_lists">
