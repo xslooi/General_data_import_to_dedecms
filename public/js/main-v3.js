@@ -682,9 +682,9 @@ requirejs(['jquery', 'custom', 'jquery.ui', 'jquery.ztree.all.min'], function($,
 
                 if(data.data){
                     var arr = data.data;
-                    var list_html = '<li><label>（类别关联字段）：</label><ul class="to-field importField" id="category_id"></ul></li>';
-                    list_html += '<li><label>（主表关联字段）：</label><ul class="to-field importField" id="master_id"></ul></li>';
-                    list_html += '<li><label>（附表关联字段）：</label><ul class="to-field importField" id="slave_id"></ul></li>';
+                    var list_html = '<li><label>（类别关联字段-typeid）：</label><ul class="to-field importField" id="category_id"></ul></li>';
+                    list_html += '<li><label>（主表关联字段-可选）：</label><ul class="to-field importField" id="master_id"></ul></li>';
+                    list_html += '<li><label>（附表关联字段-关联2）：</label><ul class="to-field importField" id="slave_id"></ul></li>';
                     var selector = '#export_fields_lists';
                     var Xselector = '#category_id li i,#master_id li i,#slave_id li i,'; //拖拉关闭按钮选择器
 

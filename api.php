@@ -548,7 +548,8 @@ function act_start_v3($data) {
 //    2、获得导出数据库数据
     //TODO 此处每次获得所有数据但只用一条，内部可加个缓存，只调用需要的那一条
     $from_data = getMssqlRelevanceData($import_typeid['from_typeid']);
-
+//var_dump($from_data);
+//exit;
 //    4、循环插入数据
     $addontablestruct = array();
     foreach($toAddonTable as $value){
@@ -1207,11 +1208,14 @@ function getMssqlRelevanceData($tid){
         $fromQuery = "SELECT * FROM `{$mainTableConfig['master']}` WHERE {$cateNameConfig['category_id']} = {$tid} ";
     }
 //echo $fromQuery;
+//    ini_set("odbc.defaultlrl", "100000"); //解决字段字符长度4096 方法一
 
     $resource = odbc_exec($connid, $fromQuery);
     $dataSet = array();
 
     if($resource){
+        odbc_longreadlen($resource, "100000"); //解决字段字符长度4096 方法二 最大为1亿+
+
         while($row = odbc_fetch_array($resource)){
             $dataSet[] = $row;
         }
